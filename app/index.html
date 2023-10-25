@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Translation App</title>
+
+    <style>
+      body {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      header {
+        height: 5rem;
+      }
+
+      .wrapper {
+        margin: auto;
+        width: 90vw;
+        max-width: 64rem;
+        box-shadow: 0px 0 8px rgba(0, 0, 0, 0.26);
+        border-radius: 0.8rem;
+      }
+
+      .lang-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.9rem 0.5rem;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .options-wrapper {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: left;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .text-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+
+      textarea {
+        padding: 0.5rem;
+        height: 25rem;
+        font-size: 1.5rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        border: 2px solid #ffffff;
+        resize: vertical;
+      }
+
+      #ta-src {
+        border-radius: 0 0 0 0.8rem;
+        margin-right: 0.1rem;
+        border-right: 1px solid #eee;
+      }
+
+      #ta-trg {
+        border-radius: 0 0 0.8rem 0;
+      }
+
+      .container {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        font-size: 1.3rem;
+        cursor: pointer;
+        border-radius: 12px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
+        min-width: 8rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #eee;
+      }
+
+      #alt-dropdown__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        /* padding: 3px; */
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #alt-dropdown__list li {
+        padding: 3px;
+      }
+
+      #alt-dropdown__list li:hover {
+        background-color: #c4f0af;
+        border: 1px solid #76c333;
+      }
+
+      select {
+        width: 12rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border-color: transparent;
+      }
+
+      label[for="input-beams"] {
+        margin: 0 5px;
+      }
+
+      #input-beams {
+        width: 3rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+
+    <div class="wrapper">
+      <div class="lang-wrapper">
+        <div>
+          <select name="src-langs" id="src-langs" onchange="onSrcLangChange()">
+            <option value="en">English [en]</option>
+          </select>
+        </div>
+        <div>
+          <select name="trg-langs" id="trg-langs" onchange="onTrgLangChange()">
+            <option value="ar">Arabic [ar]</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="options-wrapper">
+        <label for="input-beams">Beams:</label>
+        <input type="number" id="input-beams" value="4" min="1" />
+      </div>
+
+      <div class="text-wrapper">
+        <div class="container">
+          <textarea id="ta-src" oninput="translateSrc()"></textarea>
+        </div>
+
+        <div class="container">
+          <textarea readonly id="ta-trg" onclick="taTrgClickHandler(event)">
+          </textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-content" id="alt-dropdown">
+      <ol id="alt-dropdown__list"></ol>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const taSrc = document.getElementById("ta-src");
+      const taTrg = document.getElementById("ta-trg");
+      const altDropdown = document.getElementById("alt-dropdown");
+      const altDropdownList = document.getElementById("alt-dropdown__list");
+      const selectSrc = document.getElementById("src-langs");
+      const selectTrg = document.getElementById("trg-langs");
+      const inputBeams = document.getElementById("input-beams");
+
+      const rtlLangs = ["Arabic", "Urdu", "Persian", "Hebrew"];
+      const host = "";
+
+      document.onclick = (e) => {
+        if (e.target != taTrg && e.target != altDropdownList) {
+          hideDropdown();
+        }
+      };
+
+      // UTILS
+      const clearList = (node) => {
+        while (node.lastChild) {
+          node.removeChild(node.lastChild);
+        }
+      };
+
+      const populateSelect = (select, entries) => {
+        entries.forEach((entry) =>
+          select.add(
+            new Option(
+              entry,
+              entry,
+              (selected = entry == "English [en]"),
+              (defaultSelected = entry == "English [en]")
+            )
+          )
+        );
+      };
+
+      // GET LANGUAGES
+      const fetchSrcLanguages = async () => {
+        const response = await fetch(`${host}/api/get-src-langs`);
+        const data = await response.json();    
+        clearList(selectSrc);
+        populateSelect(selectSrc, data.src_langs);
+      };
+
+      const fetchTrgLanguages = async (srcLang) => {
+        const response = await fetch(
+          `${host}/api/get-trg-langs?srclang=${srcLang}`
+        );
+        const data = await response.json();      
+        clearList(selectTrg);
+        populateSelect(selectTrg, data.trg_langs);
+      };
+
+      fetchSrcLanguages();
+      fetchTrgLanguages(selectSrc.value);
+
+      const onSrcLangChange = () => {
+        const srcLang = selectSrc.value;
+        fetchTrgLanguages(srcLang);
+        const isRtl =
+          rtlLangs.findIndex((value) => srcLang.includes(value)) >= 0;
+        taSrc.dir = isRtl ? "rtl" : "ltr";
+      };
+
+      const onTrgLangChange = () => {
+        const trgLang = selectTrg.value;
+        const isRtl =
+          rtlLangs.findIndex((value) => trgLang.includes(value)) >= 0;
+        taTrg.dir = isRtl ? "rtl" : "ltr";
+      };
+
+      // TRANSLATE
+      const translateSrc = async () => {
+        const text = taSrc.value;
+        if (text === "") {
+          taTrg.value = "";
+          return;
+        }
+
+        const response = await fetch(`${host}/api/translate`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            text: text,
+            src_lang: selectSrc.value,
+            trg_lang: selectTrg.value,
+            n_beams: inputBeams.value,
+          }),
+        });
+
+        const data = await response.json(); 
+        taTrg.value = data.text_trg;
+      };
+
+      // ALTERNATIVE TOKENS
+      const taTrgClickHandler = async (event) => {
+        const pos = taTrg.selectionStart;
+        if (taTrg.selectionEnd - pos > 0 || event.detail == 2) return;
+
+        const response = await fetch(`${host}/api/get-alt-tokens?pos=${pos}`);
+        const data = await response.json();
+
+        altDropdown.style.left = `${event.clientX}px`;
+        altDropdown.style.top = `${event.clientY}px`;
+        altDropdown.style.display = "block";
+        fillAltList(data.alt);
+      };
+
+      const fillAltList = (entries) => {
+        clearList(altDropdownList);
+        entries.forEach((token, tidx) => {
+          const li = document.createElement("li");
+          li.innerText = token;
+          li.onclick = () => altClick(token);
+          altDropdownList.appendChild(li);
+        });
+      };
+
+      const altClick = async (token) => {
+        const response = await fetch(`${host}/api/change-token?token=${token}`);
+        const data = await response.json();
+        taTrg.value = data.alt;
+        hideDropdown();
+      };
+
+      const hideDropdown = () => {
+        altDropdown.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
