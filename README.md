@@ -8,7 +8,7 @@ python app.py
 ```
 Preview:
 
-![image](https://github.com/nipponjo/nmt-web-ui/assets/28433296/d5860e63-c3ab-4d74-b6c5-96a2d73ca0d5)
+![image](https://github.com/nipponjo/nmt-web-ui/assets/28433296/6314ce80-797f-4642-acbc-65c7139bc760)
 
 Requirements:
 
