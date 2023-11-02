@@ -113,6 +113,7 @@ class TranslationManager:
 
     def _get_token_idx_at(self, pos: int) -> int:
         tokens_len = np.array([len(tok) for tok in self.current_tokens])
+        if self.current_tokens[0].startswith('▁'): tokens_len[0] -= 1 # _ at beginning is ignored
         tokens_cumsum = np.cumsum(tokens_len)
         token_idx = np.searchsorted(tokens_cumsum, pos)
         return token_idx

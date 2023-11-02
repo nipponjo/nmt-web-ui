@@ -1,6 +1,6 @@
 # nmt-web-ui
 
-A local Web UI for the [huggingface/Helsinki-NLP](https://huggingface.co/Helsinki-NLP) neural machine translation models using [FastAPI](https://fastapi.tiangolo.com/).
+A local Web UI for the [huggingface/Helsinki-NLP](https://huggingface.co/Helsinki-NLP) neural machine translation models.
 
 Run with:
 ```bash

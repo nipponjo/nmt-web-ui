@@ -4,152 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Translation App</title>
-
-    <style>
-      body {
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      header {
-        height: 5rem;
-      }
-
-      .wrapper {
-        margin: auto;
-        width: 90vw;
-        max-width: 64rem;
-        box-shadow: 0px 0 8px rgba(0, 0, 0, 0.26);
-        border-radius: 0.8rem;
-      }
-
-      .lang-wrapper {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.9rem 0.5rem;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .options-wrapper {
-        padding: 0.5rem;
-        display: flex;
-        justify-content: left;
-        border-bottom: 2px solid #ccc;
-      }
-
-      .text-wrapper {
-        display: flex;
-        justify-content: center;
-      }
-
-      textarea {
-        padding: 0.5rem;
-        height: 25rem;
-        font-size: 1.5rem;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        border: 2px solid #ffffff;
-        resize: vertical;
-      }
-
-      #ta-src {
-        border-radius: 0 0 0 0.8rem;
-        margin-right: 0.1rem;
-        border-right: 1px solid #eee;
-      }
-
-      #ta-trg {
-        border-radius: 0 0 0.8rem 0;
-      }
-
-      .container {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        font-size: 1.3rem;
-        cursor: pointer;
-        border-radius: 12px;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
-        min-width: 8rem;
-        background-color: rgba(255, 255, 255, 0.9);
-        border: 1px solid #eee;
-      }
-
-      #alt-dropdown__list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        /* padding: 3px; */
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-
-      #alt-dropdown__list li {
-        padding: 3px;
-      }
-
-      #alt-dropdown__list li:hover {
-        background-color: #c4f0af;
-        border: 1px solid #76c333;
-      }
-
-      select {
-        width: 12rem;
-        font-size: 1rem;
-        border-radius: 5px;
-        border-color: transparent;
-      }
-
-      label[for="input-beams"] {
-        margin: 0 5px;
-      }
-
-      #input-beams {
-        width: 3rem;
-      }
-    </style>
+    <link rel="stylesheet" href="static/light.css">
+    <link id="theme" rel="stylesheet" href="static/light.css">
   </head>
 
   <body>
-    <header></header>
-
-    <div class="wrapper">
-      <div class="lang-wrapper">
-        <div>
-          <select name="src-langs" id="src-langs" onchange="onSrcLangChange()">
-            <option value="en">English [en]</option>
-          </select>
+    <header>
+      <h2>Translation App</h2>
+      <button class="toggle-button" onclick="toggleTheme()">
+        <div id="theme-mode"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg></div>
+      </button>
+    </header>  
+    <main>
+      <div class="wrapper">
+        <div class="lang-wrapper">
+          <div>
+            <select name="src-langs" id="src-langs" onchange="onSrcLangChange()">
+              <option value="en">English [en]</option>
+            </select>
+          </div>
+          <div>
+            <select name="trg-langs" id="trg-langs" onchange="onTrgLangChange()">
+              <option value="ar">Arabic [ar]</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <select name="trg-langs" id="trg-langs" onchange="onTrgLangChange()">
-            <option value="ar">Arabic [ar]</option>
-          </select>
+
+        <div class="options-wrapper">
+          <label for="input-beams">Beams:</label>
+          <input
+            type="number"
+            id="input-beams"
+            value="4"
+            min="1"
+            onchange="translateSrc()"
+          />
+        </div>
+
+        <div class="text-wrapper">
+          <div class="container">
+            <textarea id="ta-src" oninput="translateSrc()"></textarea>
+          </div>
+
+          <div class="container">
+            <textarea readonly id="ta-trg" onclick="taTrgClickHandler(event)">
+            </textarea>
+          </div>
         </div>
       </div>
 
-      <div class="options-wrapper">
-        <label for="input-beams">Beams:</label>
-        <input type="number" id="input-beams" value="4" min="1" />
+      <div class="dropdown-content" id="alt-dropdown">
+        <ol id="alt-dropdown__list"></ol>
       </div>
-
-      <div class="text-wrapper">
-        <div class="container">
-          <textarea id="ta-src" oninput="translateSrc()"></textarea>
-        </div>
-
-        <div class="container">
-          <textarea readonly id="ta-trg" onclick="taTrgClickHandler(event)">
-          </textarea>
-        </div>
-      </div>
-    </div>
-
-    <div class="dropdown-content" id="alt-dropdown">
-      <ol id="alt-dropdown__list"></ol>
-    </div>
+    </main>
+    <footer></footer>
 
     <!-- SCRIPT -->
     <script>
@@ -164,11 +72,49 @@
       const rtlLangs = ["Arabic", "Urdu", "Persian", "Hebrew"];
       const host = "";
 
+
+      // UI
       document.onclick = (e) => {
         if (e.target != taTrg && e.target != altDropdownList) {
           hideDropdown();
         }
       };
+
+      // THEME
+      const themeId = document.getElementById('theme');
+      const modeIcon = document.getElementById('theme-mode');
+      
+      const svgMoon = '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg>';
+      const svgSun = '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg>';
+
+      let theme = "light";
+
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = "dark"
+        setTheme("dark");
+      }     
+
+      function setTheme(theme) {
+        if (theme === "dark") {
+          themeId.href = "static/dark.css";
+          modeIcon.innerHTML = svgSun;
+        } else if (theme === "light") {
+          themeId.href = "static/light.css";
+          modeIcon.innerHTML = svgMoon;
+        } else {
+          modeIcon.innerHTML = svgMoon;
+          themeId.href = "static/light.css";
+          console.log(theme)
+          console.log("Theme not supported!");
+        }
+      };
+
+      const toggleTheme = () => {
+          theme =  (theme === "light") ? 'dark' : 'light';
+          setTheme(theme);
+      };
+
+
 
       // UTILS
       const clearList = (node) => {
@@ -193,7 +139,7 @@
       // GET LANGUAGES
       const fetchSrcLanguages = async () => {
         const response = await fetch(`${host}/api/get-src-langs`);
-        const data = await response.json();    
+        const data = await response.json();
         clearList(selectSrc);
         populateSelect(selectSrc, data.src_langs);
       };
@@ -202,7 +148,7 @@
         const response = await fetch(
           `${host}/api/get-trg-langs?srclang=${srcLang}`
         );
-        const data = await response.json();      
+        const data = await response.json();
         clearList(selectTrg);
         populateSelect(selectTrg, data.trg_langs);
       };
@@ -246,7 +192,7 @@
           }),
         });
 
-        const data = await response.json(); 
+        const data = await response.json();
         taTrg.value = data.text_trg;
       };
 

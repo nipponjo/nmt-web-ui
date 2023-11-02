@@ -26,17 +26,22 @@ translator = TranslationManager()
 #         allow_headers=['*'],
 #         )
 
+
 @app.get('/')
-def index():
-    return FileResponse('./app/index.html')
+async def index():
+    return FileResponse(f'./app/index.html')
+
+@app.get('/static/{filename}')
+async def static_file(filename: str):
+    return FileResponse(f'./app/static/{filename}')
 
 @app.get('/api/get-src-langs')
-def get_src_languages():
+async def get_src_languages():
     src_langs = lang_informer.get_src_languages()
     return {'src_langs': src_langs}
 
 @app.get('/api/get-trg-langs')
-def get_trg_languages(srclang: str):
+async def get_trg_languages(srclang: str):
     lang_code = srclang.split('[')[-1].removesuffix(']')
     trg_langs = lang_informer.get_trg_languages(lang_code)
     return {'trg_langs': trg_langs}
@@ -53,12 +58,12 @@ async def translate(request: TranslRequest):
     return {'text_trg': text_trg}
 
 @app.get('/api/get-alt-tokens')
-def get_alt_tokens(pos: int):
+async def get_alt_tokens(pos: int):
     alternative_tokens = translator._alternative_tokens_at(pos)
     return {'alt': alternative_tokens}
 
 @app.get('/api/change-token')
-def change_token(token: str):
+async def change_token(token: str):
     text_trg = translator._change_token(token)
     return {'alt': text_trg}
 
