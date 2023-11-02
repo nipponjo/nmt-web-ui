@@ -8,7 +8,11 @@ python app.py
 ```
 Preview:
 
-![image](https://github.com/nipponjo/nmt-web-ui/assets/28433296/6314ce80-797f-4642-acbc-65c7139bc760)
+<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/5334b131-4684-4fc6-9ba3-98257ac1fcca" width="80%"></img>
+
+dark mode:
+
+<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/7b08b229-f2b3-427d-a05a-b645219c24cb" width="80%"></img>
 
 Requirements:
 
