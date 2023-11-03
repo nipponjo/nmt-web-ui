@@ -8,11 +8,12 @@ python app.py
 ```
 Preview:
 
-<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/5334b131-4684-4fc6-9ba3-98257ac1fcca" width="80%"></img>
+<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/3b00b54c-01c3-44da-b5a5-a3efa45481f5" width="80%"></img>
 
 dark mode:
 
-<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/7b08b229-f2b3-427d-a05a-b645219c24cb" width="80%"></img>
+<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/82296fea-8c31-4e9e-be86-400736c69bd2" width="80%"></img>
+
 
 Requirements:
 
