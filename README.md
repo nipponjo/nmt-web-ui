@@ -14,6 +14,10 @@ dark mode:
 
 <img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/82296fea-8c31-4e9e-be86-400736c69bd2" width="80%"></img>
 
+display cross-attention values:
+
+<img src="https://github.com/nipponjo/nmt-web-ui/assets/28433296/1b89a965-628e-47fd-80fd-819ac945133f" width="78%"></img>
+
 
 Requirements:
 
