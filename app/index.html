@@ -4,53 +4,98 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Translation App</title>
-    <link rel="stylesheet" href="static/light.css">
-    <link id="theme" rel="stylesheet" href="static/light.css">
+    <link rel="stylesheet" href="static/light.css" />
+    <link id="theme" rel="stylesheet" href="static/light.css" />
   </head>
 
   <body>
     <header>
       <h2>Translation App</h2>
       <button class="toggle-button" onclick="toggleTheme()">
-        <div id="theme-mode"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg></div>
+        <div id="theme-mode">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            enable-background="new 0 0 24 24"
+            height="100%"
+            viewBox="0 0 24 24"
+            width="100%"
+            fit=""
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+          >
+            <rect fill="none" height="24" width="24"></rect>
+            <path
+              d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"
+            ></path>
+          </svg>
+        </div>
       </button>
-    </header>  
+    </header>
     <main>
-      <div class="wrapper">
+      <div class="panel-wrapper">
         <div class="lang-wrapper">
           <div>
-            <select name="src-langs" id="src-langs" onchange="onSrcLangChange()">
+            <select
+              name="src-langs"
+              id="src-langs"
+              onchange="onSrcLangChange()"
+            >
               <option value="en">English [en]</option>
             </select>
           </div>
           <div>
-            <select name="trg-langs" id="trg-langs" onchange="onTrgLangChange()">
+            <select
+              name="trg-langs"
+              id="trg-langs"
+              onchange="onTrgLangChange()"
+            >
               <option value="ar">Arabic [ar]</option>
             </select>
           </div>
         </div>
 
         <div class="options-wrapper">
-          <label for="input-beams">Beams:</label>
-          <input
-            type="number"
-            id="input-beams"
-            value="4"
-            min="1"
-            onchange="translateSrc()"
-          />
+          <span>
+            <label for="input-beams">Beams:</label>
+            <input
+              type="number"
+              id="input-beams"
+              value="4"
+              min="1"
+              onchange="translateSrc()"
+            />
+          </span>
+          <span>
+            <label for="cbox-caa">Show cross-attention</label>
+            <input type="checkbox" id="cbox-caa" onchange="setCaa(this)" />
+          </span>
         </div>
 
         <div class="text-wrapper">
           <div class="container">
-            <textarea id="ta-src" oninput="translateSrc()" spellcheck="false"></textarea>
+            <textarea
+              id="ta-src"
+              oninput="translateSrc()"
+              spellcheck="false"
+            ></textarea>
           </div>
 
           <div class="container">
-            <textarea readonly id="ta-trg" onclick="taTrgClickHandler(event)">
+            <textarea
+              readonly
+              id="ta-trg"
+              onclick="taTrgClickHandler(event)"
+              spellcheck="false"
+            >
             </textarea>
           </div>
         </div>
+      </div>
+
+      <div class="caa-wrapper">
+        <table>
+          <tbody id="caa-tbody"></tbody>
+        </table>
       </div>
 
       <div class="dropdown-content" id="alt-dropdown">
@@ -69,9 +114,10 @@
       const selectTrg = document.getElementById("trg-langs");
       const inputBeams = document.getElementById("input-beams");
 
+      const caaTable = document.getElementById("caa-tbody");
+
       const rtlLangs = ["Arabic", "Urdu", "Persian", "Hebrew"];
       const host = "";
-
 
       // UI
       document.onclick = (e) => {
@@ -81,40 +127,43 @@
       };
 
       // THEME
-      const themeId = document.getElementById('theme');
-      const modeIcon = document.getElementById('theme-mode');
-      
-      const svgMoon = '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg>';
-      const svgSun = '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg>';
+      const themeId = document.getElementById("theme");
+      const modeIcon = document.getElementById("theme-mode");
+
+      const svgMoon =
+        '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg>';
+      const svgSun =
+        '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="100%" viewBox="0 0 24 24" width="100%" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><rect fill="none" height="24" width="24"></rect><path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg>';
 
       let theme = "light";
 
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        theme = "dark"
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        theme = "dark";
         setTheme("dark");
-      }     
+      }
 
       function setTheme(theme) {
         if (theme === "dark") {
           themeId.href = "static/dark.css";
-          modeIcon.innerHTML = svgSun;
+          modeIcon.innerHTML = svgMoon;
         } else if (theme === "light") {
           themeId.href = "static/light.css";
-          modeIcon.innerHTML = svgMoon;
+          modeIcon.innerHTML = svgSun;
         } else {
-          modeIcon.innerHTML = svgMoon;
+          modeIcon.innerHTML = svgSun;
           themeId.href = "static/light.css";
-          console.log(theme)
+          console.log(theme);
           console.log("Theme not supported!");
         }
-      };
+      }
 
       const toggleTheme = () => {
-          theme =  (theme === "light") ? 'dark' : 'light';
-          setTheme(theme);
+        theme = theme === "light" ? "dark" : "light";
+        setTheme(theme);
       };
-
-
 
       // UTILS
       const clearList = (node) => {
@@ -124,13 +173,13 @@
       };
 
       const populateSelect = (select, entries) => {
-        entries.forEach((entry) =>
+        entries.forEach(({code, name}) =>
           select.add(
             new Option(
-              entry,
-              entry,
-              (selected = entry == "English [en]"),
-              (defaultSelected = entry == "English [en]")
+              name,
+              code,
+              (selected = name === "English [en]"),
+              (defaultSelected = name === "English [en]")
             )
           )
         );
@@ -194,6 +243,11 @@
 
         const data = await response.json();
         taTrg.value = data.text_trg;
+        console.log(data);
+
+        if ("caa" in data) {
+          populateCaaTable(data["caa"]);
+        }
       };
 
       // ALTERNATIVE TOKENS
@@ -223,12 +277,35 @@
       const altClick = async (token) => {
         const response = await fetch(`${host}/api/change-token?token=${token}`);
         const data = await response.json();
-        taTrg.value = data.alt;
+        taTrg.value = data.text_trg;
         hideDropdown();
+
+        if ("caa" in data) {
+          populateCaaTable(data["caa"]);
+        }
       };
 
       const hideDropdown = () => {
         altDropdown.style.display = "none";
+      };
+
+      // CAA
+      const setCaa = (cbox) => {
+        fetch(`${host}/api/set-caa?mode=${cbox.checked ? "on" : "off"}`);
+        document.querySelector(".caa-wrapper").style.display = cbox.checked
+          ? "block"
+          : "none";
+      };
+
+      const populateCaaTable = (CaaData) => {
+        clearList(caaTable);
+
+        CaaData.forEach((entry) => {
+          const [token, ca] = entry;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${token.replace("▁", "..")}</td><td>${ca}</td>`;
+          caaTable.appendChild(tr);
+        });
       };
     </script>
   </body>

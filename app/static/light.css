@@ -3,7 +3,7 @@
   --font-color: black;
   --panel-shadow-color: rgba(0, 0, 0, 0.26);
   --panel-border-color: #ccc;
-  --panel-bg-color: inherit;
+  --theme-button-color: rgb(247 194 55);  
 }
 
 body {
@@ -24,17 +24,18 @@ header {
 .toggle-button {
   background-color: transparent;
   border-color: transparent;
+  cursor: pointer;
 }
 
 #theme-mode {
   transition: 0.5s;
   height: 2rem;
   width: 2rem;
-  fill: rgb(248, 216, 35);
+  fill: var(--theme-button-color);
 }
 
 #theme-mode:hover {    
-  fill: white;
+  fill: var(--bg-color);
   transform: rotate(60deg);
 }
 
@@ -45,10 +46,9 @@ h2 {
 }
 
 /* MAIN */
-main {
+.panel-wrapper {
   margin: auto;
-  width: 90vw;
-  max-width: 64rem;
+  width: min(64rem, 90vw);
   box-shadow: 0px 0 8px var(--panel-shadow-color);
   border-radius: 0.8rem;
   color: var(--font-color);
@@ -69,6 +69,7 @@ select {
   border-color: transparent;
   background-color: inherit;
   color: inherit;
+  cursor: pointer;
 }
 
 select option {
@@ -78,10 +79,22 @@ select option {
 .options-wrapper {
   padding: 0.5rem;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   border-bottom: 1px solid var(--panel-border-color);
 }
-label[for="input-beams"] {
+
+span {
+  display: flex;
+  justify-items: center;
+}
+
+label {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 420;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  text-align: left;
   margin: 0 5px;
 }
 
@@ -162,3 +175,32 @@ textarea {
   background-color: #c4f0af;
   border: 1px solid #76c333;
 }
+
+/* CAA TABLE */
+
+.caa-wrapper {
+  display: none;
+}
+
+table {
+  color: var(--font-color);
+  width: min(64rem, 90vw);
+  margin: 2rem auto;
+  border: 1px solid var(--panel-border-color);
+  border-radius: 0.8rem;
+  box-shadow: 0px 0 8px var(--panel-shadow-color);
+  font-size: 1.32rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+tr:nth-child(even) {
+  background-color: #cccccc1c;
+}
+
+td:first-child {
+  font-weight: bold;
+  min-width: 3rem;
+  padding: 0 1rem 0 0.3rem;
+}
+

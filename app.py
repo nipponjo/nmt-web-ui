@@ -41,21 +41,23 @@ async def get_src_languages():
     return {'src_langs': src_langs}
 
 @app.get('/api/get-trg-langs')
-async def get_trg_languages(srclang: str):
-    lang_code = srclang.split('[')[-1].removesuffix(']')
-    trg_langs = lang_informer.get_trg_languages(lang_code)
+async def get_trg_languages(srclang: str):    
+    trg_langs = lang_informer.get_trg_languages(srclang)
     return {'trg_langs': trg_langs}
+
+@app.get('/api/set-caa')
+async def set_caa(mode: str):
+    translator._set_caa(on=mode=='on')
+    return {}
 
 @app.post('/api/translate')
 async def translate(request: TranslRequest):
-    print(request)
-    src = request.src_lang.split('[')[-1].removesuffix(']')
-    trg_ = request.trg_lang.split('[')[-1].removesuffix(']')
-    trg, mod = trg_.split(', ')
-    translator.load_model(src, trg, mod)
+    print(request)        
+    trg, mod = request.trg_lang.split('-')
+    translator.load_model(request.src_lang, trg, mod)
     text_src = request.text
-    text_trg = translator(text_src, num_beams=request.n_beams)
-    return {'text_trg': text_trg}
+    return_dict = translator(text_src, num_beams=request.n_beams)
+    return return_dict
 
 @app.get('/api/get-alt-tokens')
 async def get_alt_tokens(pos: int):
@@ -64,9 +66,9 @@ async def get_alt_tokens(pos: int):
 
 @app.get('/api/change-token')
 async def change_token(token: str):
-    text_trg = translator._change_token(token)
-    return {'alt': text_trg}
+    return_dict = translator._change_token(token)
+    return return_dict
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8001)
