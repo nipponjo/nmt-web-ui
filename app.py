@@ -12,20 +12,12 @@ class TranslRequest(BaseModel):
     src_lang: str
     trg_lang: str
     n_beams: int
+    caa: bool
 
 app = FastAPI()
 
 lang_informer = LanguageInformer()
 translator = TranslationManager()
-
-# app.add_middleware(
-#     CORSMiddleware,
-#         allow_origins=['*'],
-#         allow_credentials=True,
-#         allow_methods=['*'], 
-#         allow_headers=['*'],
-#         )
-
 
 @app.get('/')
 async def index():
@@ -45,28 +37,24 @@ async def get_trg_languages(srclang: str):
     trg_langs = lang_informer.get_trg_languages(srclang)
     return {'trg_langs': trg_langs}
 
-@app.get('/api/set-caa')
-async def set_caa(mode: str):
-    translator._set_caa(on=mode=='on')
-    return {}
-
 @app.post('/api/translate')
 async def translate(request: TranslRequest):
     print(request)        
     trg, mod = request.trg_lang.split('-')
     translator.load_model(request.src_lang, trg, mod)
-    text_src = request.text
-    return_dict = translator(text_src, num_beams=request.n_beams)
+    return_dict = translator(text_src=request.text, 
+                             num_beams=request.n_beams, 
+                             caa=request.caa)
     return return_dict
 
 @app.get('/api/get-alt-tokens')
 async def get_alt_tokens(pos: int):
-    alternative_tokens = translator._alternative_tokens_at(pos)
+    alternative_tokens = translator.alternative_tokens_at(pos)
     return {'alt': alternative_tokens}
 
 @app.get('/api/change-token')
 async def change_token(token: str):
-    return_dict = translator._change_token(token)
+    return_dict = translator.change_token(token)
     return return_dict
 
 

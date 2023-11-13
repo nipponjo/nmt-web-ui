@@ -187,7 +187,7 @@ class TranslationManager:
 
         self.current_tokens = tokens_out
 
-    def _get_token_idx_at(self, char_pos: int) -> int:
+    def get_token_idx_at(self, char_pos: int) -> int:
         """Returns token index at character position `char_pos`"""
         tokens_len = np.array([len(token) for token in self.current_tokens])
         if self.current_tokens[0].startswith('▁'): tokens_len[0] -= 1 # _ at beginning is ignored
@@ -196,7 +196,7 @@ class TranslationManager:
 
         return token_idx
     
-    def _alternative_tokens(self, 
+    def alternative_tokens(self, 
                             token_idx: int, 
                             topk: int = 10) -> list[str]:
         """Returns alternative tokens for the token at token index `token_idx`"""
@@ -216,14 +216,14 @@ class TranslationManager:
         self.token_idx = token_idx
         return alternative_tokens
     
-    def _alternative_tokens_at(self, 
+    def alternative_tokens_at(self, 
                                char_pos: int, 
                                topk: int = 10) -> list[str]:
         """Returns alternative tokens for the token at character position `char_pos`"""
-        token_idx = self._get_token_idx_at(char_pos)
-        return self._alternative_tokens(token_idx, topk=topk)
+        token_idx = self.get_token_idx_at(char_pos)
+        return self.alternative_tokens(token_idx, topk=topk)
     
-    def _change_token(self, new_token: str) -> dict:
+    def change_token(self, new_token: str) -> dict:
         if self.token_idx is None:
             return
         
@@ -248,9 +248,13 @@ class TranslationManager:
                  text_src: Optional[str] = None, 
                  num_beams: int = 4, 
                  max_length: int = 512, 
-                 decoder_input_ids: Optional[torch.LongTensor] = None
+                 decoder_input_ids: Optional[torch.LongTensor] = None,
+                 caa: Optional[bool] = None,
                  ) -> dict:
         device = self.device
+
+        if caa is not None:
+            self._set_caa(on=caa)
 
         if text_src is None: text_src = self.current_src_text 
         self.current_src_text = text_src

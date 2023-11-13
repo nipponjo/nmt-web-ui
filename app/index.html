@@ -119,6 +119,29 @@
       const rtlLangs = ["Arabic", "Urdu", "Persian", "Hebrew"];
       const host = "";
 
+      // UTILS
+      const $ = q => document.querySelector(q);
+      const $id = id => document.getElementById(id);
+
+      const clearList = (node) => {
+        while (node.lastChild) {
+          node.removeChild(node.lastChild);
+        }
+      };
+
+      const populateSelect = (select, entries) => {
+        entries.forEach(({code, name}) =>
+          select.add(
+            new Option(
+              name,
+              code,
+              (selected = code === "en"),
+              (defaultSelected = code === "en")
+            )
+          )
+        );
+      };
+
       // UI
       document.onclick = (e) => {
         if (e.target != taTrg && e.target != altDropdownList) {
@@ -137,15 +160,7 @@
 
       let theme = "light";
 
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        theme = "dark";
-        setTheme("dark");
-      }
-
-      function setTheme(theme) {
+      const setTheme = (theme) => {
         if (theme === "dark") {
           themeId.href = "static/dark.css";
           modeIcon.innerHTML = svgMoon;
@@ -160,29 +175,17 @@
         }
       }
 
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        theme = "dark";
+        setTheme("dark");
+      }
+
       const toggleTheme = () => {
         theme = theme === "light" ? "dark" : "light";
         setTheme(theme);
-      };
-
-      // UTILS
-      const clearList = (node) => {
-        while (node.lastChild) {
-          node.removeChild(node.lastChild);
-        }
-      };
-
-      const populateSelect = (select, entries) => {
-        entries.forEach(({code, name}) =>
-          select.add(
-            new Option(
-              name,
-              code,
-              (selected = name === "English [en]"),
-              (defaultSelected = name === "English [en]")
-            )
-          )
-        );
       };
 
       // GET LANGUAGES
@@ -238,6 +241,7 @@
             src_lang: selectSrc.value,
             trg_lang: selectTrg.value,
             n_beams: inputBeams.value,
+            caa: $id("cbox-caa").checked,
           }),
         });
 
@@ -290,11 +294,8 @@
       };
 
       // CAA
-      const setCaa = (cbox) => {
-        fetch(`${host}/api/set-caa?mode=${cbox.checked ? "on" : "off"}`);
-        document.querySelector(".caa-wrapper").style.display = cbox.checked
-          ? "block"
-          : "none";
+      const setCaa = (cbox) => {    
+        $(".caa-wrapper").style.display = cbox.checked ? "block" : "none";
       };
 
       const populateCaaTable = (CaaData) => {
