@@ -24,4 +24,4 @@ Requirements:
 - PyTorch
 - [huggingface/transformers](https://huggingface.co/docs/transformers/installation)
 - [FastAPI](https://fastapi.tiangolo.com/): for the backend api | uvicorn: for serving the app
-- Install with: `pip install fastapi "uvicorn[standard]"`
+- Install with: `pip install fastapi "uvicorn[standard]" transformers sentencepiece`
